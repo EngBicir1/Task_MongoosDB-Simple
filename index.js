@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const colors = require('colors');
 
 // Connection
 mongoose.connect('mongodb://127.0.0.1:27017/task')
@@ -15,15 +16,16 @@ async function db(){
 
         const user = new User({
         name: 'Bicir',
-        age : 12,
-        email : 'aryan@gmail.com',
+        age : 50,
+        email : 'Bicir@gmail.com',
         password : '12345',
     })
 
     await user.save();
     console.log(user); 
-    } catch (e) {
-        console.log(e);
+    } 
+    catch (e) {
+        console.log(colors.red.underline.bold(e.message));
     }
 
 }

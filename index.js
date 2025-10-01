@@ -28,6 +28,23 @@ app.post('/task', async (req,res) => {
    
 })
 
+// User Add Data
+
+app.post('/user', async (req,res) => {
+
+    try {
+        console.log(req.body);
+        const user = new User(req.body);
+        console.log(user);
+        await user.save();
+        return res.status(201).json({ success: true, user});
+        
+    } catch (e) {
+        return res.status(400).json({ success: false, message : e.message });
+    }
+
+   
+})
 
 
 

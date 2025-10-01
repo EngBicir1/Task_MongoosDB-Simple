@@ -9,6 +9,69 @@ mongoose.connect('mongodb://127.0.0.1:27017/task')
 const User = require('./model/User');
 const Task = require('./model/Task');
 
+/*
+    /task Post 
+    /task Get
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // async function db(){
 
@@ -31,19 +94,4 @@ const Task = require('./model/Task');
 // }
 
 // db();
-async function db(){
 
-    try {
-         const task = new Task({
-            description: 'Task networking in organisation',
-         })
-         await task.save();
-        console.log(task); 
-    } 
-    catch (e) {
-        console.log(colors.red.underline.bold(e.message));
-    }
-
-}
-
-db();

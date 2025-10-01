@@ -10,19 +10,36 @@ const User = require('./model/User');
 const Task = require('./model/Task');
 
 
+// async function db(){
+
+//     try {
+
+//         const user = new User({
+//         name: '  Engabdifatah   ',
+//         age : 50,
+//         email : 'bicirmoha@gmail.com',
+//         password : '12345',
+//     })
+
+//     await user.save();
+//     console.log(user); 
+//     } 
+//     catch (e) {
+//         console.log(colors.red.underline.bold(e.message));
+//     }
+
+// }
+
+// db();
 async function db(){
 
     try {
-
-        const user = new User({
-        name: '  Engabdifatah   ',
-        age : 50,
-        email : 'bicirmoha@gmail.com',
-        password : '12345',
-    })
-
-    await user.save();
-    console.log(user); 
+         const task = new Task({
+            description: 'Abdifataah Mohamed yuusuf Raage ',
+            isCompleted: true,
+         })
+         await task.save();
+        console.log(task); 
     } 
     catch (e) {
         console.log(colors.red.underline.bold(e.message));

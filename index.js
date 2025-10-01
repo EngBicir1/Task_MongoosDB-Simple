@@ -16,9 +16,7 @@ app.post('/task', async (req,res) => {
 
     try {
 
-        console.log(req.body);
         const task = new Task(req.body);
-        console.log(task);
         await task.save();
         return res.status(201).json({ success: true, task});
         

@@ -15,9 +15,9 @@ async function db(){
     try {
 
         const user = new User({
-        name: 'Bicir',
+        name: '  Engabdifatah   ',
         age : 50,
-        email : 'Bicir@gmail.com',
+        email : 'bicirmoha@gmail.com',
         password : '12345',
     })
 

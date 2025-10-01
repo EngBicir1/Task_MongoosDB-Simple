@@ -35,8 +35,7 @@ async function db(){
 
     try {
          const task = new Task({
-            description: 'Abdifataah Mohamed yuusuf Raage ',
-            isCompleted: true,
+            description: 'Task networking in organisation',
          })
          await task.save();
         console.log(task); 

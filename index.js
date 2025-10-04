@@ -47,15 +47,32 @@ app.post('/user', async (req,res) => {
 })
 
 
-
+// Task get Data
 app.get('/task',async (req,res)=>{
     const tasks = await Task.find();
     return res.json({success: true, tasks});
 })
+
+// User get Data
+
 app.get('/user',async (req,res)=>{
     const user = await User.find();
     return res.json({success: true, user});
 })
+
+
+// Task Get By Data ID 
+app.get('/task/:id',async (req,res)=>{
+    const task = await Task.findById(req.params.id);
+    return res.json({success: true, task});
+})
+// User Get Data By ID 
+app.get('/user/:id',async (req,res)=>{
+    const user = await User.findById(req.params.id);
+    return res.json({success: true, user});
+})
+
+
 
 
 
@@ -63,9 +80,6 @@ const port = process.env.PORT || 4040;
 app.listen(port,()=>{
     console.log(`server is running at port ${port}`);
 })
-
-
-
 
 /*
     /task Post 

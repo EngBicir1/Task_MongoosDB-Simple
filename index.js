@@ -48,8 +48,18 @@ app.post('/user', async (req,res) => {
 
 
 
-const port = process.env.PORT || 4040;
+app.get('/task',async (req,res)=>{
+    const tasks = await Task.find();
+    return res.json({success: true, tasks});
+})
+app.get('/user',async (req,res)=>{
+    const user = await User.find();
+    return res.json({success: true, user});
+})
 
+
+
+const port = process.env.PORT || 4040;
 app.listen(port,()=>{
     console.log(`server is running at port ${port}`);
 })

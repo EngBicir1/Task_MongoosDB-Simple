@@ -1,29 +1,27 @@
+const express = require('express');
+const router = express.Router();
+const Task = require('../model/Task');
 // add Data Task
-app.post('/task', async (req,res) => {
-
+router.post('/task', async (req,res) => {
     try {
 
         const task = new Task(req.body);
         await task.save();
-        return res.status(201).json({ success: true, task});
-        
+        return res.status(201).json({ success: true, task});   
     } catch (e) {
         return res.status(400).json({ success: false, message : e.message });
     }
-
-
-   
 });
 
 // Task get Data
-app.get('/task',async (req,res)=>{
+router.get('/task',async (req,res)=>{
     const tasks = await Task.find();
     return res.json({success: true, tasks});
 });
 
 
 // Task Get By Data ID 
-app.get('/task/:id',async (req,res)=>{
+router.get('/task/:id',async (req,res)=>{
     const task = await Task.findById(req.params.id);
     if(!task){
         return res.status(404).json({
@@ -36,7 +34,7 @@ app.get('/task/:id',async (req,res)=>{
 });
 
 // Task Update id
-app.patch('/task/:id',async (req,res)=>{
+router.patch('/task/:id',async (req,res)=>{
 
 
     try {
@@ -68,7 +66,7 @@ app.patch('/task/:id',async (req,res)=>{
 
 
 //Delete Task Data
-app.delete('/task/:id' , async (req, res) => {
+router.delete('/task/:id' , async (req, res) => {
     
     try {
         const task = await Task.findByIdAndDelete(req.params.id);
@@ -85,3 +83,5 @@ app.delete('/task/:id' , async (req, res) => {
             message : e.message });
     }
 });
+
+module.exports = router;

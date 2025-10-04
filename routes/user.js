@@ -1,6 +1,9 @@
+const express = require('express');
+const router = express.Router();
+const User = require('../model/User');
 
 // User Add Data // add data
-app.post('/user', async (req,res) => {
+router.post('/user', async (req,res) => {
 
     try {
         console.log(req.body);
@@ -17,13 +20,13 @@ app.post('/user', async (req,res) => {
 });
 
 // User get Data
-app.get('/user',async (req,res)=>{
+router.get('/user',async (req,res)=>{
     const user = await User.find();
     return res.json({success: true, user});
 });
 
 // User Get Data By ID 
-app.get('/user/:id',async (req,res)=>{
+router.get('/user/:id',async (req,res)=>{
     const user = await User.findById(req.params.id);
     if(!user){
         return res.status(404).json({
@@ -34,9 +37,9 @@ app.get('/user/:id',async (req,res)=>{
     return res.json({success: true, user});
 });
 
-// User Update By patch ID
+// User Update By ID
+router.patch('/user/:id',async (req,res)=>{
 
-app.patch('/user/:id',async (req,res)=>{
 
     try {
 
@@ -66,8 +69,7 @@ app.patch('/user/:id',async (req,res)=>{
 });
 
 // DELETE  User Data
-
-app.delete('/user/:id' , async (req, res) => {
+router.delete('/user/:id' , async (req, res) => {
     
     try {
         const user = await User.findByIdAndDelete(req.params.id);
@@ -85,3 +87,4 @@ app.delete('/user/:id' , async (req, res) => {
     }
 });
 
+module.exports = router;

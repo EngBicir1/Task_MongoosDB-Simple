@@ -12,6 +12,21 @@ mongoose.connect('mongodb://127.0.0.1:27017/task')
 const User = require('./model/User');
 const Task = require('./model/Task');
 
+/*
+    /task Post 
+    /task Get
+    /task/:id Get
+    /task/:id PATCH /UPDATE
+    /task/:id DELETE
+
+    /USER Post 
+    /USER Get
+    /USER/:id Get
+    /USER/:id PATCH /UPDATE
+    /USER/:id DELETE
+
+*/
+
 
 // add Data Task
 app.post('/task', async (req,res) => {
@@ -114,8 +129,6 @@ app.patch('/user/:id',async (req,res)=>{
 
 
 });
-
-
 // Task Update id
 app.patch('/task/:id',async (req,res)=>{
 
@@ -147,27 +160,52 @@ app.patch('/task/:id',async (req,res)=>{
 
 });
 
+
+// DELETE  User Data
+
+app.delete('/user/:id' , async (req, res) => {
+    
+    try {
+        const user = await User.findByIdAndDelete(req.params.id);
+        if(!user){
+            return res.status(404).json({
+                success: false, 
+                message: "User Not found"
+            });
+        }     
+        res.json({success: false, user})
+    } catch (e) {
+         return res.status(400).json({ 
+            success: false, 
+            message : e.message });
+    }
+});
+//Delete Task Data
+app.delete('/task/:id' , async (req, res) => {
+    
+    try {
+        const task = await Task.findByIdAndDelete(req.params.id);
+        if(!task){
+            return res.status(404).json({
+                success: false, 
+                message: "User Not found"
+            });
+        }     
+        res.json({success: false, task})
+    } catch (e) {
+         return res.status(400).json({ 
+            success: false, 
+            message : e.message });
+    }
+});
+
+
+
 // running server port
 const port = process.env.PORT || 4040;
 app.listen(port,()=>{
     console.log(`server is running at port ${port}`);
-})
-
-/*
-    /task Post 
-    /task Get
-    /task/:id Get
-    /task/:id PATCH /UPDATE
-    /task/:id DELETE
-
-    /USER Post 
-    /USER Get
-    /USER/:id Get
-    /USER/:id PATCH /UPDATE
-    /USER/:id DELETE
-
-*/
-
+});
 
 
 

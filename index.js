@@ -12,6 +12,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/task')
 const User = require('./model/User');
 const Task = require('./model/Task');
 
+
+// add Data Task
 app.post('/task', async (req,res) => {
 
     try {
@@ -26,10 +28,8 @@ app.post('/task', async (req,res) => {
 
 
    
-})
-
-// User Add Data
-
+});
+// User Add Data // add data
 app.post('/user', async (req,res) => {
 
     try {
@@ -44,38 +44,110 @@ app.post('/user', async (req,res) => {
     }
 
    
-})
-
+});
 
 // Task get Data
 app.get('/task',async (req,res)=>{
     const tasks = await Task.find();
     return res.json({success: true, tasks});
-})
-
+});
 // User get Data
-
 app.get('/user',async (req,res)=>{
     const user = await User.find();
     return res.json({success: true, user});
-})
+});
 
 
 // Task Get By Data ID 
 app.get('/task/:id',async (req,res)=>{
     const task = await Task.findById(req.params.id);
+    if(!task){
+        return res.status(404).json({
+            success: false, 
+            message: "User Not found"
+        });
+    }
+
     return res.json({success: true, task});
-})
+});
 // User Get Data By ID 
 app.get('/user/:id',async (req,res)=>{
     const user = await User.findById(req.params.id);
+    if(!user){
+        return res.status(404).json({
+            success: false, 
+            message: "User Not found"
+        });
+    }
     return res.json({success: true, user});
-})
+});
 
 
+// User Update By ID
+
+app.patch('/user/:id',async (req,res)=>{
 
 
+    try {
 
+        const user = await User.findByIdAndUpdate(req.params.id,req.body,{
+        new : true,
+        runValidators: true,
+    });
+    if(!user){
+        return res.status(404).json({
+            success: false, 
+            message: "User Not found"
+        });
+    }
+
+    return res.json({success: true, user});
+        
+    } catch (e) {
+         return res.status(400).json({ 
+            success: false, 
+            message : e.message });
+
+    }
+
+    
+
+
+});
+
+
+// Task Update id
+app.patch('/task/:id',async (req,res)=>{
+
+
+    try {
+
+        const task = await Task.findByIdAndUpdate(req.params.id,req.body,{
+        new : true,
+        runValidators: true,
+    });
+    if(!task){
+        return res.status(404).json({
+            success: false, 
+            message: "User Not found"
+        });
+    }
+
+    return res.json({success: true, task});
+        
+    } catch (e) {
+         return res.status(400).json({ 
+            success: false, 
+            message : e.message });
+
+    }
+
+    
+
+
+});
+
+// running server port
 const port = process.env.PORT || 4040;
 app.listen(port,()=>{
     console.log(`server is running at port ${port}`);

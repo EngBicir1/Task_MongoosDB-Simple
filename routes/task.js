@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const {
-    storeTask,
+    createTask,
     fetchAllTask,
     getSingleTask,
     UpdateTask,
@@ -10,7 +10,7 @@ const {
 } = require('../controller/task')
 
 // add Data Task
-router.post('/task',storeTask)
+router.post('/task',createTask)
 // Task get Data
 router.get('/task',fetchAllTask);
 // Task Get By Data ID 

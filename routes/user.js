@@ -1,14 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const {
-    storeUser,
+    createUser,
     fetchAllUser,
     getSingleUser,
     UpdateUser,
     deleteUser
 } = require('../controller/user')
 // User Add Data // add data
-router.post('/user',storeUser );
+router.post('/user',createUser );
 // User get Data
 router.get('/user',fetchAllUser);
 // User Get Data By ID 

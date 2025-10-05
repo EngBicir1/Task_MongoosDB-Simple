@@ -1,6 +1,6 @@
 const Task = require('../model/Task')
 
-exports.storeTask = async (req,res) => {
+exports.createTask = async (req,res) => {
     try {
         const task = new Task(req.body);
         await task.save();

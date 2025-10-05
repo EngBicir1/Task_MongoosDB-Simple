@@ -2,8 +2,10 @@ const Task = require('../model/Task')
 
 exports.createTask = async (req,res) => {
     try {
+        
         const task = new Task(req.body);
         await task.save();
+
         return res.status(201).json({ success: true, task});   
     } catch (e) {
         return res.status(400).json({ 

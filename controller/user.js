@@ -83,3 +83,28 @@ exports.deleteUser = async (req, res) => {
             message : e.message });
     }
 }
+
+
+
+exports.login = async (req, res)=>{
+    // email and password
+    const {email, password} = req.body;
+    const user = await User.findOne({email})
+    if (!user){
+        return res.status(401).json({
+            success: false,
+            message: 'invalid Email/Password'
+        })
+    }
+    const isMatch = await bcrypt.compare(password,user.password);
+    if (!isMatch){
+        return res.status(401).json({
+            success: false,
+            message: 'invalid Email/Password'
+        })
+    }
+    return res.status(200).json({
+        success: true, 
+        user
+    })
+}

@@ -5,10 +5,13 @@ const {
     fetchAllUser,
     getSingleUser,
     UpdateUser,
-    deleteUser
+    deleteUser,
+    login
 } = require('../controller/user')
+
 // User Add Data // add data
 router.post('/user',createUser );
+router.post('/user/login',login);
 // User get Data
 router.get('/user',fetchAllUser);
 // User Get Data By ID 
